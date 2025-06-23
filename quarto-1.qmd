@@ -1,6 +1,34 @@
 ---
 title: "Untitled"
 author: Rishi Bethina
+execute: 
+  echo: false
 format: html
 ---
 
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```
+
+```{r}
+# Create a scatter plot of flipper length vs body mass
+penguins %>%
+  drop_na() %>%  # Remove rows with missing values
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point(size = 3, alpha = 0.7) +  # Add points with some transparency
+  labs(
+    title = "Penguin Body Mass vs Flipper Length",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)",
+    color = "Species"
+  ) +
+  theme_minimal() +  # Use a minimal theme
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.position = "top"
+  ) +
+  scale_color_brewer(palette = "Set1")  # Use a color palette
+```
